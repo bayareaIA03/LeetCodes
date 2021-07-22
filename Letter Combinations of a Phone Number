@@ -27,7 +27,7 @@ class Solution {
         String[] map = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
         LinkedList<String> arr = new LinkedList<>();
         
-        if(digits == null){
+        if(digits.isEmpty()){
             return arr;
         }
         
