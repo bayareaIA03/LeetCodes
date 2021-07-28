@@ -1,0 +1,60 @@
+You are given a 2D matrix that is filled with 1’s in almost all the cells. However, there may be at most one rectangular submatrix that is filled with 0s. Implement an algorithm to return the size of the submatrix, in terms of width and height
+
+Examples:
+
+Input:
+[[1,1,1,1,1,1],
+[1,1,1,1,1,1],
+[1,1,0,0,0,1],
+[1,1,0,0,0,1],
+[1,1,1,1,1,1]]
+
+Output: [3,2] (Because the width of the submatrix of 0s is 3, and height is 2)
+
+
+Input:
+[[1,1,1,1],
+[1,1,1,1],
+[1,1,1,1]]
+
+Output: [0,0] (Because there is no submatrix that contains 0s)
+
+
+Input:
+
+[[1,1,1,1],
+[1,1,0,1],
+[1,1,1,1]]
+
+Output: [1,1] (Because the width of the submatrix of 0s is 1, and height is 1)
+
+
+
+
+public static int[] findSubmatrix(int[][] matrix) {
+    if (matrix.length == 0) return new int[]{0, 0};
+
+    // Find the upper left corner of submatrix
+    int u = 0, l = 0;
+    while (matrix[u][l] != 0) {
+        l ++;
+        if (l >= matrix[u].length) {
+            u ++;
+            l = 0;
+            // If reached the end, there is no submatrix
+            if (u >= matrix.length) return new int[]{0, 0};
+        }
+    }
+
+    // Find the down right corner of submatrix
+    int d = matrix.length - 1, r = matrix[0].length - 1;
+    while (matrix[d][r] != 0) {
+        r --;
+        if (r < 0) {
+            d --;
+            r = matrix[0].length - 1;
+        }
+    }
+
+    return new int[]{r - l + 1, d - u + 1};
+}
