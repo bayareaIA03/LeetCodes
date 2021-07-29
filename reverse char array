@@ -1,0 +1,54 @@
+Write a method reverseWords() that takes a message as an array of characters and reverses the order of the words in place.
+
+Input:
+  char[] message = { 'c', 'a', 'k', 'e', ' ',
+                   'p', 'o', 'u', 'n', 'd', ' ',
+                   's', 't', 'e', 'a', 'l' };
+                   
+Output:
+"steal pound cake"
+
+
+public class Main
+{
+	public static void main(String[] args) {
+		//Input:
+  char[] message = { 'c', 'a', 'k', 'e', ' ',
+                   'p', 'o', 'u', 'n', 'd', ' ',
+                   's', 't', 'e', 'a', 'l' };
+                   
+        // Output:
+        // "steal pound cake"
+        
+        //to bring the words at it's correct spot. eg. steal being first and cake being last word.
+        int start = 0;
+        int end = message.length-1;
+        reverseWord(message,start,end);
+        
+        //fixing the word to make it spell "steal pound cake"
+        int first =0;
+        for(int i =0; i< message.length;i++){
+            if(message[i]==' '){ // if reach at the whitespace.
+                int last = i-1;
+                reverseWord(message,first, last);
+                first = i+1;
+            }
+            else if( i==message.length-1){ // if reach the end of array
+                    int last = i;
+                    reverseWord(message,first, last);
+                 }
+            
+        }
+        System.out.println(message);
+	}
+	public static char[] reverseWord(char[] message, int start, int end){
+	    while(end>= start){
+	        char temp = message[start];
+	        message[start]=message[end];
+	        message[end] = temp;
+	        start++;
+	        end--;
+	    }
+	    return message;
+	}
+}
