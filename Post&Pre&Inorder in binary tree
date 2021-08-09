@@ -1,0 +1,86 @@
+THE FOLLOWING IS OF ITERATIVE AND NOT RECURSION!!
+
+
+
+POST-ORDER----------
+
+public class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        
+        //First Way
+        
+    //     List<Integer> res = new LinkedList<>();
+    //     helper(res, root);
+    //     return res;
+    // }
+    // public void helper(List<Integer> list, TreeNode root){
+    //     if(root == null)    return;
+    //     helper(list, root.left);
+    //     helper(list, root.right);
+    //     list.add(root.val);
+        
+         //Second Way
+        
+        List<Integer> list = new ArrayList<>();
+        if(root == null) return list;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.isEmpty()) {
+            
+            TreeNode curr = stack.pop();
+           
+            list.add(0,curr.val);
+             
+            if(curr.right!=null) {
+               stack.push(curr.right); 
+            }
+            if(curr.left!=null) {
+              stack.push(curr.left);
+            }
+        }
+        return list;
+    }
+}
+
+
+PRE-ORDER -----------
+
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if(root == null) return list;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while(!stack.empty()){
+            root = stack.pop();
+            list.add(root.val);
+            if(root.right != null) stack.push(root.right);
+            if(root.left != null) stack.push(root.left);
+        }
+        return list;
+    }
+}
+
+
+
+
+IN-ORDER---------------
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()) {
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            cur = stack.pop();
+            res.add(cur.val);
+            cur = cur.right;
+        }
+        return res;
+    }
+}
