@@ -32,30 +32,24 @@ Output: [7,9,9,9,0,5,0,0]
  */
 class Solution {
     public int[] nextLargerNodes(ListNode head) {
-        //have a pointer pointing at largest number
-        //while p1 != p2 then the largest pointer will be the answer.
-        //counter continues until p1==null;
         
         ArrayList<Integer> values = new ArrayList();
         ListNode current = head;
         
-        while(current != null){
+        while(current != null){ // will populate arraylist
             values.add(current.val);
             current = current.next;
         }
-        int[] arr= new int[values.size()];
+        int[] arr= new int[values.size()]; //give array the size of 3
         Stack<Integer> stack = new Stack();
-        
+      
         for(int i =0;i<values.size();i++){
-            System.out.println(i);
-            System.out.println(values.get(i)+" values");
-            while(!stack.isEmpty() && values.get(stack.peek()) < values.get(i)){
-  
-                
+            while(!stack.isEmpty() && values.get(stack.peek()) < values.get(i)){    //peek will look at the last(2nd index) whih is 0
                 arr[stack.pop()] = values.get(i);
             }
             stack.push(i);
         }
+
         return arr;
     }
 }
