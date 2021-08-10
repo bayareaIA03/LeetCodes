@@ -40,7 +40,7 @@ class Solution {
                 }
             }
             else{
-                if(map.containsValue(b)){
+                if(map.containsValue(b)){ // fi b is connected with a different letter
                     return false;
                 }
                 map.put(a,b);
