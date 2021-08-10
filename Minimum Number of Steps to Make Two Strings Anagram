@@ -31,8 +31,7 @@ class Solution {
         
         for (int i=0; i<s.length(); i++){
             count[s.charAt(i) - 'a'] ++;
-            // System.out.println(count[i] ++);
-            // System.out.println(s.charAt(i) - 'a'+ " s");
+      
         }
         
         for (int j=0; j<t.length(); j++){
