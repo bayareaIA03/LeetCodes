@@ -48,7 +48,7 @@ class Solution {
         // base case
         
         if (b == null) return head;
-        b = b.next;
+        b = b.next;  // b will be k+1
     }
     // reverse first k nodes
     ListNode newHead = reverse(a, b);//newhead =3,2,1
