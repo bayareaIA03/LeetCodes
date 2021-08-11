@@ -1,5 +1,20 @@
 Write a method reverseWords() that takes a message as an array of characters and reverses the order of the words in place.
 
+For example:
+
+  char[] message = { 'c', 'a', 'k', 'e', ' ',
+                   'p', 'o', 'u', 'n', 'd', ' ',
+                   's', 't', 'e', 'a', 'l' };
+
+reverseWords(message);
+
+System.out.println(message);
+// prints: "steal pound cake"
+
+Java
+When writing your method, assume the message contains only letters and spaces, and all words are separated by one space.
+
+
 
 
   public static void reverseWords(char[] message) {
