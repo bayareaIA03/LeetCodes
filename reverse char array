@@ -1,49 +1,43 @@
 Write a method reverseWords() that takes a message as an array of characters and reverses the order of the words in place.
 
-Input:
-  char[] message = { 'c', 'a', 'k', 'e', ' ',
-                   'p', 'o', 'u', 'n', 'd', ' ',
-                   's', 't', 'e', 'a', 'l' };
-                   
-Output:
-"steal pound cake"
 
 
-public class Main
-{
-	public static void main(String[] args) {
-		//Input:
-  char[] message = { 'c', 'a', 'k', 'e', ' ',
-                   'p', 'o', 'u', 'n', 'd', ' ',
-                   's', 't', 'e', 'a', 'l' };
-                   
-        // Output:
-        // "steal pound cake"
-        
-        //to bring the words at it's correct spot. eg. steal being first and cake being last word.
-        int start = 0;
-        int end = message.length-1;
-        reverseWord(message,start,end);
-        
-        //fixing the word to make it spell "steal pound cake"
-        int first =0;
-        for(int i =0; i< message.length;i++){
-            if(message[i]==' '||i==message.length-1){ // if reach at the whitespace or if reach the end of array
-                
-                reverseWord(message,first, last-1);
-                first = i+1;
-            }           
+  public static void reverseWords(char[] message) {
+
+    // first we reverse all the characters in the entire message array
+    // this gives us the right word order
+    // but with each word backward
+    reverseCharacters(message, 0, message.length - 1);
+
+    // now we'll make the words forward again
+    // by reversing each word's characters
+
+    // we hold the index of the *start* of the current word
+    // as we look for the *end* of the current word
+    int currentWordStartIndex = 0;
+    for (int i = 0; i <= message.length; i++) {
+
+        // found the end of the current word!
+        if (i == message.length || message[i] == ' ') {
+
+            // if we haven't exhausted the array, our
+            // next word's start is one character ahead
+            reverseCharacters(message, currentWordStartIndex, i - 1);
+            currentWordStartIndex = i + 1;
         }
-        System.out.println(message);
-	}
-	public static char[] reverseWord(char[] message, int start, int end){
-	    while(end>= start){
-	        char temp = message[start];
-	        message[start]=message[end];
-	        message[end] = temp;
-	        start++;
-	        end--;
-	    }
-	    return message;
-	}
+    }
+}
+
+private static void reverseCharacters(char[] message, int leftIndex, int rightIndex) {
+
+    // walk towards the middle, from both sides
+    while (leftIndex < rightIndex) {
+
+        // swap the left char and right char
+        char temp = message[leftIndex];
+        message[leftIndex] = message[rightIndex];
+        message[rightIndex] = temp;
+        leftIndex++;
+        rightIndex--;
+    }
 }
