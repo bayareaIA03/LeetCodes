@@ -1,0 +1,35 @@
+take first letter of first word and concat with last letter of second word.
+if there's no a[i+1], cycle back to the beginning of the array.
+
+string a = [cat, dog, ferret , scorpion]
+output = [cg,dt,fn]
+
+string b = [I have a nice surprise]
+output = [Ie, ha , ae , ne, sI]
+
+
+import java.util.Arrays;
+public class Main
+{
+	public static void main(String[] args) {
+	    //String[] a = {"cat","dog","ferret","scorpion"};
+	    String[] a = {"I","have","a","nice","surprise"};
+	    String[] answer = new String[a.length];
+	    for(int i =0;i<a.length;i++){
+	        StringBuilder result= new StringBuilder();
+	        if((i+1) > a.length-1 ){
+	            result.append(a[i].charAt(0));
+	            result.append(a[0].charAt(a[0].length()-1));
+	           
+	        }
+	        else{
+	            result.append(a[i].charAt(0) ) ;
+	            result.append( a[i+1].charAt(a[i+1].length()-1));
+	        }
+	      answer[i]=result.toString();
+	      
+	      
+	    }
+	    System.out.println(Arrays.toString(answer));
+	}
+}
