@@ -1,0 +1,105 @@
+Given an encoded string, return its decoded string.
+
+The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being repeated exactly k times. Note that k is guaranteed to be a positive integer.
+
+You may assume that the input string is always valid; No extra white spaces, square brackets are well-formed, etc.
+
+Furthermore, you may assume that the original data does not contain any digits and that digits are only for those repeat numbers, k. For example, there won't be input like 3a or 2[4].
+
+ 
+
+Example 1:
+
+Input: s = "3[a]2[bc]"
+Output: "aaabcbc"
+Example 2:
+
+Input: s = "3[a2[c]]"
+Output: "accaccacc"
+Example 3:
+
+Input: s = "2[abc]3[cd]ef"
+Output: "abcabccdcdcdef"
+Example 4:
+
+Input: s = "abc3[cd]xyz"
+Output: "abccdcdcdxyz"
+
+
+class Solution {
+    public String decodeString(String str) {
+        Stack<Integer> integerstack = new Stack<>();
+    Stack<Character> stringstack = new Stack<>();
+    StringBuilder result = new StringBuilder();
+
+    // Traversing the string
+    for (int i = 0; i < str.length(); i++) {
+
+        // If number, convert it into numbe and push it into integerstack.
+        if (Character.isDigit(str.charAt(i))) {         // IF THERE IS AN INT
+            StringBuilder sb = new StringBuilder();     // 1) need to know how many ints are there
+            while (Character.isDigit(str.charAt(i))) {  // 2) append it in integerstack
+                sb.append(str.charAt(i));
+                i++;
+            }
+            i--;
+
+            integerstack.push(Integer.parseInt(sb.toString()));
+        } else if (str.charAt(i) == ']') {              //IF THERE IS ']' CLOSING BRACKET
+            // If closing bracket ']', pop elemment until '[' opening bracket is not found in the character stack.
+            String temp = "";                           // 1) pop from integerstack (if) put them in count variable
+            int count = 0;                              // 2) pop all characters from stringstack (while) put them in temp variable eg abc
+                                                        // 3) pop '[' from stringstack (if)
+            if (!integerstack.isEmpty()) {              // 4) append temp in result count amount of times
+                count = integerstack.pop();             // 5) put result in stringstack
+            }                                           // 6) clear result
+
+            while (!stringstack.isEmpty() && stringstack.peek()!='[') {
+                temp = stringstack.pop() + temp;
+            }
+
+            if (!stringstack.empty() && stringstack.peek() == '['){
+                stringstack.pop();
+            }
+
+            // Repeating the popped string 'temp' count number of times.
+            for (int j = 0; j < count; j++) {
+                result.append(temp);
+            }
+
+            // Push it in the character stack.
+            for (int j = 0; j < result.length(); j++){
+                stringstack.push(result.charAt(j));
+            }
+
+            // clear
+            result.setLength(0);
+        }
+
+        // If '[' opening bracket, push it into character stack.
+        else if (str.charAt(i) == '[')                  // IF THERE IS '[]' OPENING BRACKET
+        {                                               // 1) (if) i-1 is digit, put '[' in stringstack
+            if (Character.isDigit(str.charAt(i-1)))     // 2) else put '[' and push (1) in integerstack
+                stringstack.push(str.charAt(i));
+
+            else
+            {
+                stringstack.push(str.charAt(i));
+                integerstack.push(1);
+            }
+        }
+
+        else    //CHARACTERS
+            stringstack.push(str.charAt(i));            // 1) push all characters in stringstack
+    }
+
+    // Pop all the element, make a string and return.
+    while (!stringstack.isEmpty())                      // 1) put everything in stringstack in result StringBuilder
+    {
+        result.insert(0, stringstack.peek());
+        stringstack.pop();
+    }
+
+    return result.toString();
+    }
+}
