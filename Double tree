@@ -1,0 +1,28 @@
+For each node in a binary tree, create a new duplicate node, and insert the duplicate as the left child of the original node.
+
+
+
+
+
+/*
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public static TreeNode doubleTree(TreeNode root) {
+    
+    if (root == null) 
+        return root;
+        
+    doubleTree(root.left);
+    doubleTree(root.right);
+    
+    TreeNode oldLeft = root.left; 
+    root.left = new TreeNode(root.val);
+    root.left.left = oldLeft; 
+    
+    return root;
+}
