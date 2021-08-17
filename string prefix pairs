@@ -1,0 +1,36 @@
+String[] a = {"one","two","three","four"};
+String[] b = {"onetwo","one","four"};
+
+output =true
+explaination = b array first index is the pair of "a" array first two index
+
+
+public class Main
+{
+	public static void main(String[] args) {
+	   
+	    String[] a = {"one","two","three","four"};
+	    String[] b = {"onetwo","one","four"};
+	    String combine = "";
+	    int j=0;
+	    for(int i =0; i<b.length;i++){
+	        
+	        combine+=a[i];
+	        if(combine.equals(b[j])){
+	            j++;
+	           
+	            if((i-1)>=0 && a[i-1] == b[j]){
+	                System.out.println("true");
+	                break;
+	            }
+	            else{
+	                System.out.println("false");
+	                break;
+	            }
+	           
+	        }
+	    }
+	  //  System.out.println("false");
+		
+	}
+}
