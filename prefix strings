@@ -1,0 +1,48 @@
+QUESTION
+
+string a:
+back = backdoor
+back = backgammon
+comeback = come
+output = 3
+
+
+string b:
+abc = a 
+abc = a
+abc = ab
+a = a
+a = ab
+a = ac
+a = ab
+a = ac
+output = 8
+
+
+public class Main
+{
+	public static void main(String[] args) {
+	    String[] a = {"back","backdoor","gammon","backgammon","comeback","come","door"}; //output 3
+	    //String[] a = {"abc","a","a","b","ab","ac"}; //output 8
+
+	   int max = 0;
+	  
+	  // String gotIt= a[0];
+	   
+	    for(int i =1;i<a.length;i++){
+	        String gotIt= a[i-1];
+	        int z=i;
+            while(z<= a.length-1){
+    	        if(gotIt.startsWith(a[z]) || a[z].startsWith(gotIt) ){
+    	            System.out.println(gotIt + " "+a[z]);
+    	            max++;
+    	        }
+	         z++;
+            }
+	    }
+	  
+	    System.out.println(max);
+	   
+        
+	}
+}
