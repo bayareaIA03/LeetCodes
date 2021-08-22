@@ -1,0 +1,43 @@
+Write a function to find if a given integer x appears more than n/2 times in a sorted array of n integers.
+
+Input:  [1, 2, 3, 3, 3, 3, 10], x = 3
+Output: True (x appears more than n/2 times in the given array)
+
+Input:  [1, 1, 2, 4, 4, 4, 6, 6], x = 4
+Output: False (x doesn't appear more than n/2 times in the given array)
+
+Input:  [1, 1, 1, 2, 2], x = 1
+Output: True (x appears more than n/2 times in the given array)
+
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+public class Main
+{
+	public static void main(String[] args) {
+// 	    Input:  [1, 2, 3, 3, 3, 3, 10], x = 3
+// Output: True (x appears more than n/2 times in the given array)
+        
+        int[] input = {1, 2, 3, 3, 3, 3, 10};
+        HashMap<Integer,Integer> map = new HashMap();
+        int x = 3;
+        int mid = input.length/2;
+        for(int i =0;i<input.length;i++){
+            if(map.containsKey(input[i]) && input[i] == x){
+                map.put(input[i],map.get(input[i])+1);
+                if(map.get(input[i]) == mid){
+                    System.out.println(i);
+                    System.out.println("we are done");
+                    //return;
+                }
+            }
+            else{
+                map.put(input[i],map.getOrDefault(input[i],0)+1);
+            }
+            
+        }
+	System.out.println(map);
+	}
+}
