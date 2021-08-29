@@ -20,7 +20,7 @@ class Solution {
         LinkedList<int[]> list = new  LinkedList<>();
         for(int[] in : intervals){
             
-            if(list.isEmpty()||list.getLast()[1] < in[0]){
+            if(list.isEmpty()||list.getLast()[1] < in[0]){ //[1,3] [4,5]
                 list.add(in);
             }
             else{
