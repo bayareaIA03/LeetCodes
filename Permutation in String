@@ -1,0 +1,55 @@
+Given two strings s1 and s2, return true if s2 contains a permutation of s1, or false otherwise.
+
+In other words, return true if one of s1's permutations is the substring of s2.
+
+ 
+
+Example 1:
+
+Input: s1 = "ab", s2 = "eidbaooo"
+Output: true
+Explanation: s2 contains one permutation of s1 ("ba").
+Example 2:
+
+Input: s1 = "ab", s2 = "eidboaoo"
+Output: false
+
+
+
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        if(s1.length()>s2.length()|| s2.length()== 0){
+            return false;
+        }
+        if(s1.length() ==0){
+            return true;
+        }
+        
+        int[] alphabetss1 = new int [26];
+        int[] alphabetss2 = new int [26];
+        
+        for(int i=0;i<s1.length();i++){
+            alphabetss1[s1.charAt(i)-'a']++;
+            alphabetss2[s2.charAt(i)-'a']++;
+        }
+        
+        if(Arrays.equals(alphabetss1,alphabetss2)){
+             return true;
+        }
+        
+        for(int i=s1.length();i<s2.length();i++){
+            //sliding window
+            alphabetss2[s2.charAt(i-s1.length())-'a']--; //take out the first char that was put in
+            alphabetss2[s2.charAt(i)-'a']++; // add the next char
+            
+            System.out.println(i);
+            System.out.println(Arrays.toString(alphabetss1));
+            System.out.println(Arrays.toString(alphabetss2));
+            
+            if(Arrays.equals(alphabetss1,alphabetss2)){  //if last letter thats added to the array makes both the array the same must check before the loop ends
+                return true;
+            }
+        }
+        return false;
+    }
+}
