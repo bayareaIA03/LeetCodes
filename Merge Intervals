@@ -17,15 +17,18 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 class Solution {
     public int[][] merge(int[][] intervals) {
         Arrays.sort(intervals,(a,b) -> Integer.compare(a[0],b[0]));
-        LinkedList <int[]> list = new LinkedList<>();
-        for(int[] i :intervals)
-            if(list.isEmpty() || list.getLast()[1] < i[0]){
-                list.add(i);
+        LinkedList<int[]> list = new  LinkedList<>();
+        for(int[] in : intervals){
+            
+            if(list.isEmpty()||list.getLast()[1] < in[0]){
+                list.add(in);
             }
             else{
-                list.getLast()[1] = Math.max(list.getLast()[1] , i[1]);
+                list.getLast()[0]=Math.min(in[0],list.getLast()[0]);
+                list.getLast()[1]=Math.max(in[1],list.getLast()[1]);           
             }
-           // System.out.println(Arrays.toString(intervals[i]));
-        return list.toArray(new int[list.size()][]);
+        }
+
+        return list.toArray(new int[list.size()][]);   
     }
 }
