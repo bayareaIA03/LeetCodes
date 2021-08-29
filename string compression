@@ -1,0 +1,53 @@
+MY OWN CODE
+
+example 1 = abaasass
+output = aba2sas2
+
+example 2 = wwww
+output = w4
+
+
+
+import java.util.*;
+
+
+public class Main
+{
+	public static void main(String[] args) {
+	    String a="hbjbhzashazle";
+	    
+		System.out.println(comp(a));
+	}
+	public static String comp(String message){
+	    StringBuilder sb = new StringBuilder();
+	    int counter = 1;
+	    for(int i = 1;i<message.length();i++){
+	        if(message.charAt(i) != message.charAt(i-1)){       //abc
+	            sb.append(message.charAt(i-1));
+	        }
+	        else{
+	            while(message.charAt(i) == message.charAt(i-1)&& i<message.length()-1){
+	                System.out.println(i);
+	                System.out.println(counter);
+	                counter++;
+	                i++;
+	                
+	                System.out.println(i);
+	            }
+	            
+	            if(message.charAt(i) == message.charAt(i-1)){       //abc
+	            sb.append(message.charAt(i-1));
+	            counter++;
+	            sb.append(counter);
+	            }
+	            else{
+    	            sb.append(message.charAt(i-1));
+    	            sb.append(counter);
+	            }
+	            counter = 1;
+	        }
+	    }
+	    System.out.println(message.length());
+	    return sb.toString();
+	}
+}
