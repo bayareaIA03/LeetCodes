@@ -60,9 +60,9 @@ class Solution {
                 return mid;
             }
             else if(nums[mid] < target){ // need to go on the right side
-                left = mid;
+                left = mid+1;
             }
-            else right = mid; // target is at the left side of mid
+            else right = mid-1; // target is at the left side of mid
         }
         return -1;
     }
