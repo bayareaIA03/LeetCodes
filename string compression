@@ -27,15 +27,11 @@ public class Main
 	        }
 	        else{
 	            while(message.charAt(i) == message.charAt(i-1)&& i<message.length()-1){
-	                System.out.println(i);
-	                System.out.println(counter);
 	                counter++;
 	                i++;
-	                
-	                System.out.println(i);
 	            }
 	            
-	            if(message.charAt(i) == message.charAt(i-1)){       //abc
+	            if(message.charAt(i) == message.charAt(i-1)){       //abccccc
 	            sb.append(message.charAt(i-1));
 	            counter++;
 	            sb.append(counter);
