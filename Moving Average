@@ -1,0 +1,36 @@
+
+Write a class for the moving average of a data stream. The class “MovingAverage” will have a constructor with parameter of integer type called windowSize. It will have a method called next which takes an integer val as input and returns moving average.
+
+For example:
+
+MovingAverage m = new MovingAverage(3);
+m.next(1)   //  1                 return 1.00000
+m.next(10)  // (1 + 10) / 2       return 5.50000
+m.next(3)   // (1 + 10 + 3) / 3   return 4.66667
+m.next(5)   // (10 + 3 + 5) / 3   return 6.00000
+
+
+
+class MovingAverage {
+    double sum;
+    int windowSize;
+    LinkedList<Integer> list;
+ 
+    public MovingAverage(int windowSize) {
+        this.list = new LinkedList<>();
+        this.windowSize = windowSize;
+    }
+ 
+    public double next(int val) {
+        sum += val;
+        list.offer(val);  // Add val as last element
+ 
+        if (list.size() <= windowSize) {
+            return sum / list.size();
+        }
+ 
+        sum -= list.poll();  // Retreive and pop first element
+ 
+        return sum / windowSize;
+    }
+}
