@@ -1,0 +1,46 @@
+ Given a string and a list of number, split the string according to the list and swap it. Return the swapped string.
+For example: given "descognail" and [3,2,3,1,1]
+We split the string as "des" = 3, "co" = 2, "gna" = 3, "i" = 1, "l" = 1 like the list
+Then we swap "des" with "co", "gna" with "i" and left with "l" (no swap). We then have "codesignal" isntead of the original "descognail". Then return "codesignal".
+
+
+import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+public class Main
+{
+	public static void main(String[] args) {
+	    String str ="descognail";
+	    int[] sizes={3,2,3,1,1};
+// 	    String news = str.replace("a"," ").trim();
+// 		System.out.println(news);
+		System.out.println(concatSwaps(str,sizes));
+	}
+	public static String concatSwaps(String str, int[] arr){
+	    if(str.length()==1){
+	        return str;
+	    }
+	    StringBuilder sb = new StringBuilder();
+        String[] strArray = new String[arr.length];
+        int prev =0;
+        for(int i=0; i< arr.length; i++){
+            strArray[i] = str.substring(prev, prev + arr[i]);
+            System.out.println(strArray[i]+ " str");
+            
+            prev = prev + arr[i];
+            System.out.println(prev+" prev");
+        }
+        System.out.println(Arrays.toString(strArray));
+        for(int i=0; i< strArray.length; i++){
+            if(i+1< strArray.length){
+                sb.append(strArray[i+1]);
+                sb.append(strArray[i]);
+                i = i+1;
+            } else{
+                sb.append(strArray[i]);
+            }
+
+        }
+     return sb.toString();  
+	}
+}
