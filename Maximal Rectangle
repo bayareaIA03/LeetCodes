@@ -1,0 +1,97 @@
+Given a rows x cols binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
+
+ 
+
+Example 1:
+
+
+Input: matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+Output: 6
+Explanation: The maximal rectangle is shown in the above picture.
+Example 2:
+
+Input: matrix = []
+Output: 0
+Example 3:
+
+Input: matrix = [["0"]]
+Output: 0
+Example 4:
+
+Input: matrix = [["1"]]
+Output: 1
+Example 5:
+
+Input: matrix = [["0","0"]]
+Output: 0
+
+
+
+class Solution {
+    public int maximalRectangle(char[][] matrix) {
+        if (matrix.length == 0)
+            return 0;
+        int row = matrix.length, col = matrix[0].length;
+        int[] heights = new int[col];
+        int maxArea = 0;
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] == '0')
+                    heights[j] = 0;
+                if (matrix[i][j] == '1')
+                    heights[j] += 1;
+            }
+            maxArea = Math.max(maxArea, largestRectangleArea(heights));
+            
+        }
+        
+        return maxArea;
+    }
+
+    private int largestRectangleArea(int[] heights) {
+        Stack<Integer> stack = new Stack<>(); // will hold the left indexs of i
+        int maxs = 0;
+        
+        //stack.add(0);
+        for (int i = 0; i < heights.length; i++) { // will be the right side of the matrix
+            int curr = heights[i];
+            System.out.println(curr+" height");
+            if(stack.isEmpty() || curr >= heights[stack.peek()]){
+                stack.add(i);
+                System.out.println(stack.peek()+" peek");
+            }
+            else{
+                while(!stack.isEmpty() && curr < heights[stack.peek()]){
+                    int temp = heights[stack.pop()];// will pop until the height to the left of "i" is less than it. This is holding the left side when doing height * (right - left) temp is the height
+                    System.out.println(temp+" temp");
+                    if(stack.isEmpty()){
+                        maxs = Math.max(maxs,temp*i);
+                    }
+                    else{
+                        maxs = Math.max(maxs,temp*(i-stack.peek()-1));
+                        System.out.println(temp+" temp2");
+                    }
+                    System.out.println(maxs+" maxs");
+                }
+                stack.add(i);
+            }
+        }
+       
+        if(!stack.isEmpty()){
+            
+            while(!stack.isEmpty() ){
+                int i = heights.length;
+                    int temp = heights[stack.pop()];
+                    if(stack.isEmpty()){
+                        maxs = Math.max(maxs,temp*i);
+                    }
+                    else{
+                        maxs = Math.max(maxs,temp*(i-stack.peek()-1));
+                    }
+                }
+        }
+        
+        return maxs;
+    }
+}
