@@ -1,0 +1,26 @@
+question is mentioned here 
+https://www.chegg.com/homework-help/questions-and-answers/1-array-game-given-array-integers-determine-number-moves-make-elements-equal-move-consists-q70544533
+
+public class Main
+{
+	public static void main (String[] args){
+                System.out.println(countMoves(new int[]{3,4,6,6,3}));
+                
+        }
+        
+        public static long countMoves(int numbers[]){
+            int min = Integer.MAX_VALUE;
+            
+            for(int i = 0; i < numbers.length; i++){
+                min = Math.min(min, numbers[i]);
+            }
+            
+            long sum = 0;
+            
+            for(int i : numbers){
+                sum += i - min;
+            }
+            
+            return sum;
+        }
+}
