@@ -1,4 +1,5 @@
-Given an array arr of distinct integers and a nonnegative integer k, write a function findPairsWithGivenDifference that returns an array of all pairs [x,y] in arr, such that x - y = k. If no such pairs exist, return an empty array.
+Given an array arr of distinct integers and a nonnegative integer k, write a function findPairsWithGivenDifference that returns an array of all pairs [x,y] in arr,
+such that x - y = k. If no such pairs exist, return an empty array.
 
 Note: the order of the pairs in the output array should maintain the order of the y element in the original array.
 
@@ -33,7 +34,6 @@ class Solution {
   // -1 - -2 == k
   // [0, -1, -2, 2, 1], k = 1
   
- // two sum
   /*
   { 
     -1: 0
@@ -54,12 +54,12 @@ class Solution {
    
    
    for (int x: arr) {
-     map.put(x-k, x);
+     map.put(x-k, x); // y:x
    }
    
    for (int x: arr) {
      if (map.containsKey(x)) {
-       list.add(new int[] {map.get(x), x});
+       list.add(new int[] {map.get(x), x}); // getting x:y
      }
    }
    int [][] ans = new int[list.size()][2];
