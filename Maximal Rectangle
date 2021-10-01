@@ -50,7 +50,7 @@ class Solution {
     }
 
     private int largestRectangleArea(int[] heights) {
-        Stack<Integer> stack = new Stack<>(); // will hold the left indexs of i
+        Stack<Integer> stack = new Stack<>(); // will hold the left indexs of histogram
         int maxs = 0;
         
         //stack.add(0);
@@ -66,10 +66,10 @@ class Solution {
                     int temp = heights[stack.pop()];// will pop until the height to the left of "i" is less than it. This is holding the left side when doing height * (right - left) temp is the height
                     System.out.println(temp+" temp");
                     if(stack.isEmpty()){
-                        maxs = Math.max(maxs,temp*i);
+                        maxs = Math.max(maxs,temp*i);//temp=height , I= width
                     }
                     else{
-                        maxs = Math.max(maxs,temp*(i-stack.peek()-1));
+                        maxs = Math.max(maxs,temp*(i-stack.peek()-1)); //width=right-left , I-stackpeek and it's -1 because include 0 in arrays 
                         System.out.println(temp+" temp2");
                     }
                     System.out.println(maxs+" maxs");
