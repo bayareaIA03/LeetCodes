@@ -82,7 +82,7 @@ class Solution {
             
             while(!stack.isEmpty() ){
                 int i = heights.length;
-                    int temp = heights[stack.pop()];
+                    int temp = heights[stack.pop()];// pass the height of the index in stack to the temp variable
                     if(stack.isEmpty()){
                         maxs = Math.max(maxs,temp*i);
                     }
