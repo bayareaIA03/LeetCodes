@@ -14,8 +14,8 @@ public class Main
 {
 	public static void main(String[] args) {
 		 int[][] arr = { { 2,2,2},
-                        { 3,3,3 },
-                        { 4,4,4} };
+                                 { 3,3,3 },
+                                 { 4,4,4} };
  
         // Given target sum
         int K = 27;
@@ -23,7 +23,9 @@ public class Main
         // Function Call
         findMaxMatrixSize(arr, K);
 	}
-		static void findMaxMatrixSize(int[][] arr, int k)
+	
+	
+	static void findMaxMatrixSize(int[][] arr, int k)
     {
         int row = arr.length;
         int col = arr[0].length;
@@ -35,30 +37,33 @@ public class Main
             for(int j = 1;j<=col;j++){
                 
                 arr2[i][j] = arr[i-1][j-1]+
-                arr2[i-1][j]+
-                arr2[i][j-1]-
-                arr2[i-1][j-1];
+                	     arr2[i-1][j]+
+                             arr2[i][j-1]-
+                             arr2[i-1][j-1];
             }
            // System.out.println("here");
         }
+	
+	
+	//Binary Search of k
         int ans = 0;
-        //System.out.println("here");
         for(int i=1;i<=row;i++){
             for(int j =1;j<=col;j++){
                 
                 int l = ans;
-                int r = Math.min(row - i+1, col-j+1);
+                int r = Math.min(row - i+1, col-j+1); // bottom left corner (row) or top right corner (col)  
                 
                 // Index out of bound
                 // if (i + ans - 1 > row || j + ans - 1 > col)
                 //      break;
+		
                 while(l<r){
                     int mid = l+(r-l+1)/2;
                     
                     if(arr2[i + mid - 1][j + mid - 1]+
                     arr2[i-1][j-1]-
                     arr2[i + mid - 1][j-1]-
-                    arr2[i-1][j + mid - 1] <=k){
+                    arr2[i-1][j + mid - 1] <=k){ // mid + top left corner - bottom left corner of mid - upper right corner of mid 
                         l = mid;
                     }
                     else{
