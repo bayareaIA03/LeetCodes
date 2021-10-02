@@ -1,0 +1,46 @@
+FULL QUESTION IS IN = https://www.chegg.com/homework-help/questions-and-answers/4-prime-given-integer-number-prime-return-1-otherwise-return-smallest-divisor-greater-1-ex-q77777385
+
+Given an integer, if the number is prime, return 1. 
+Otherwise return its smallest divisor greater than 1. 
+Example n = 24 The number 24 is not prime: its divisors are
+[1, 2, 3, 4, 6, 8, 12, 24]. The smallest divisor greater than 1 is 2.
+
+
+
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+		int n = 7;
+		int ans = 0;
+		boolean isPrime=true;
+		
+		if(n==0||n==1){  
+             System.out.println(n+" is not prime number");      
+		}
+		
+        for(int i=2;i<=n;i++) // loop from 2 to square root of n
+        {
+        
+        if(n%i==0) //Not a prime. if has no remainder(0), not a prime               
+            {
+            ans=i; // take smallest divisor
+            isPrime = false;
+            break;
+            }
+            
+        }
+        if(!isPrime)//if value of fact has a remainder then it is not a prime number
+        System.out.println(ans+" Not prime");
+        else
+		    System.out.println(1+" is prime");
+	}
+}
