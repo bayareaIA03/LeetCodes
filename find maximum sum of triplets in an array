@@ -1,3 +1,5 @@
+
+
 Given three integers, i, j, and k, a sequence sum to be the value of
 i + (i + 1) + (i + 2) + (i + 3) + … + j + (j − 1) + (j − 2) + (j − 3) + … + k 
 (increment from i until it equals j, then decrement from j until it equals k). 
@@ -5,7 +7,7 @@ Given values i, j, and k,
 calculate the sequence sum as described.Examplei = 5 j = 9 k = 6 in java
 
 
-
+question found at = https://www.chegg.com/homework-help/questions-and-answers/given-three-integers-j-k-sequence-sum-value-1-2-3--j-j-1-j-2-j-3--k-increment-equals-j-dec-q56043066
 
 /******************************************************************************
 
