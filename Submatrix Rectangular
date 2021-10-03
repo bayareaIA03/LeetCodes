@@ -1,4 +1,5 @@
-You are given a 2D matrix that is filled with 1’s in almost all the cells. However, there may be at most one rectangular submatrix that is filled with 0s. Implement an algorithm to return the size of the submatrix, in terms of width and height
+You are given a 2D matrix that is filled with 1’s in almost all the cells. However, there may be at most one rectangular submatrix that is filled with 0s. 
+Implement an algorithm to return the size of the submatrix, in terms of width and height
 
 Examples:
 
