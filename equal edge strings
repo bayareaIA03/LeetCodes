@@ -1,0 +1,57 @@
+Given an array of strings words, for each consecutive pair of words check if they start and end with the same character.
+
+Return a boolean array of length words.length - 1, where ith element is true if words[i] and words[i + 1] start and end with the same character, and false otherwise.
+
+Example:  For words = ["abcd", "abdd", "da", "dd"], the output should be equalEdgedStrings(words) = [true, false, false].
+
+The first character of both words[0] and words[1] is 'a', and last one is - 'd'. So 0th element of the answer is true.
+The first character of words[1] is 'a', but the first character of words[2] is 'd'. So 1st element of the answer is false.
+The last character of words[2] is 'a', but the last character of words[3] is 'd'. So 2nd element of the answer is false.
+For words = ["a", "a"], the output should be equalEdgedStrings(words) = [true].
+Input/Output
+
+
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+import java.util.Arrays;
+public class Main
+{
+	public static void main(String[] args) {
+	    String[] words = {"ab","dabcacab"};
+		System.out.println(Arrays.toString(equalEdgeStrings(words)));
+		
+	}
+	public static boolean[] equalEdgeStrings(String[] words){
+	    boolean[] ans = new boolean[words.length-1];
+	    if(words.length<2){
+		    return new boolean[]{};
+		}
+		for(int i =0;i<words.length-1;i++){
+		    char a = words[i].charAt(0);
+		    char b = words[i+1].charAt(0);
+		    if(a==b){
+		        int s = words[i].length()-1;
+		        int t = words[i+1].length()-1;
+		        char y = words[i].charAt(s);
+		        char z = words[i+1].charAt(t);
+		        if(y==z){
+		            ans[i] = true;
+		        }
+		        else{
+		            ans[i] = false;
+		        }
+		    }
+		    else{
+		       ans[i] = false; 
+		    }
+		    
+		}
+		return ans;
+	}
+}
