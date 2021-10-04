@@ -1,0 +1,67 @@
+Full question is here = https://www.chegg.com/homework-help/questions-and-answers/javascript-tried-solution-doesn-t-pass-test-cases-function-sumofstrings-b-q69102339
+
+question
+input a = 11
+      b = 9
+      outcome = 110
+      
+      a=99
+      b=99
+      outcome = 1818
+      
+Note = will go from right to left until one of the length of string is finish then from left to right the finish the unfinished string.
+
+
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+public class Main
+{
+	public static void main(String[] args) {
+	    String a="11";
+	    String b = "9";
+	    //124   -> 
+	    int max = 0;
+	    StringBuilder sb = new StringBuilder();
+	    if(a.length()<=b.length()){
+	        max = a.length()-1;
+	    }
+	    else{
+	        max = b.length()-1;
+	    }
+	    
+	    for(int i =max;i>= 0;i--){
+	        
+	        int first = a.charAt(a.length()-1)-'0';
+	        int second = b.charAt(b.length()-1)-'0';
+	        int ans = first + second;
+	        
+	        //System.out.println(ans+" ans");
+	       sb.append(ans);
+	    }
+	   // System.out.println(a.length()-b.length()+" hey");
+	    
+	    int z = 0;
+	    if(a.length()>b.length()){
+	        if(z < a.length()-b.length()){
+	             String save = a.substring(z,a.length()-b.length());
+	             //System.out.println(save+" save");
+	             sb.insert(0,save);
+	        }
+	    }
+	    else{
+	        if(z < b.length()-a.length()){
+	             String save = b.substring(z,b.length()-a.length());
+	              //System.out.println(save+" save");
+	             sb.insert(0,save);
+	            
+	        }
+	    }
+		System.out.println(sb.toString());
+	}
+}
