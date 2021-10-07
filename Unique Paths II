@@ -41,12 +41,12 @@ class Solution {
        int row = obstacleGrid.length;
         int col = obstacleGrid[0].length;
         
-        int[][] ans = new int[row][col];
+        int[][] ans = new int[row][col]; //create a 2d array to save the values in it 
         
         for(int i =0; i< row;i++){
             if(obstacleGrid[i][0]==1){
                 ans[i][0] = 0;
-                break;
+                break; // break so that the rest of the rows are 0
             }
             else{
                ans[i][0] = 1; 
@@ -56,14 +56,14 @@ class Solution {
         for(int j =0;j<col;j++){
            if(obstacleGrid[0][j]==1){
                 ans[0][j] = 0;
-               break;
+               break; // break so that the rest of the col are 0
             }
             else{
                ans[0][j] = 1; 
             } 
         }
         
-        for(int i=1;i<row;i++){
+        for(int i=1;i<row;i++){ // skip to 1 index cuz dealt with it already above
             for(int j =1;j<col;j++){
                 if(obstacleGrid[i][j] == 1){
                     ans[i][j] = 0;
