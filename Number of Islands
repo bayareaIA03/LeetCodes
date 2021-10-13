@@ -32,11 +32,9 @@ class Solution {
         }
         int nums = 0;
         for(int i=0;i<grid.length;i++){
-            int n = grid[i].length;
             for(int j=0;j<grid[i].length;j++){
                 if(grid[i][j]=='1'){
                    nums+= draw_graph(grid,i,j);
-                   // nums++;
                 }
             }
         }
