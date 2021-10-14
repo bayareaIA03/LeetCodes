@@ -31,19 +31,18 @@ All the words in wordList are unique.
 
 
 //time complex = m^2*n   m=amount of characters need to run in word    n= wordlist size/ every word
-// space comple = m*n
+// space comple = n
 class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         if(wordList.size()<1){
             return 0;
         }
         
-        HashSet<String> set = new HashSet<String>(wordList);
+        HashSet<String> set = new HashSet<String>(wordList); // set is to take out duplicates
         
         if(!set.contains(endWord)){
             return 0;        
         }
-        Set<String> visited = new HashSet<>(); // duplicates wont be added in the set
         
         Queue<String> queue = new LinkedList<>();
         queue.add(beginWord);
@@ -64,15 +63,15 @@ class Solution {
                         arr[i]=(char) j;
                         
                         String similarWord = new String(arr); //M space
-                        if(set.contains(similarWord) && !visited.contains(similarWord)){
-                          queue.add(similarWord);
-                          visited.add(similarWord);
+                        if(set.contains(similarWord)){
+                            queue.add(similarWord);  
+                            set.remove(similarWord);  // after see a string remove it.
                         }
                     }
                 }
             }
             depth++;
-        }
+        }      
         return 0;
     }
 }
