@@ -1,0 +1,68 @@
+Alice has some number of cards and she wants to rearrange the cards into groups so that each group is of size groupSize, and consists of groupSize consecutive cards.
+
+Given an integer array hand where hand[i] is the value written on the ith card and an integer groupSize, return true if she can rearrange the cards, or false otherwise.
+
+ 
+
+Example 1:
+
+Input: hand = [1,2,3,6,2,3,4,7,8], groupSize = 3
+Output: true
+Explanation: Alice's hand can be rearranged as [1,2,3],[2,3,4],[6,7,8]
+Example 2:
+
+Input: hand = [1,2,3,4,5], groupSize = 4
+Output: false
+Explanation: Alice's hand can not be rearranged into groups of 4.
+
+ 
+
+Constraints:
+
+1 <= hand.length <= 104
+0 <= hand[i] <= 109
+1 <= groupSize <= hand.length
+
+
+/* inside of treemap
+1 1
+2 2
+3 2
+4 1
+6 1
+7 1
+8 1
+
+*/
+class Solution {
+    public boolean isNStraightHand(int[] hand, int groupSize) {
+        if(hand.length % groupSize != 0){
+            return false;
+        }
+        TreeMap<Integer,Integer> tree = new TreeMap<>();
+        for(int i=0;i<hand.length;i++){
+             tree.put(hand[i], tree.getOrDefault(hand[i],0)+1);
+   
+        }
+      //      for(Map.Entry m : tree.entrySet()){    
+      //  System.out.println(m.getKey()+" "+m.getValue());    
+      // } 
+       // System.out.println(tree.firstKey());
+        while(!tree.isEmpty()){
+            int size = tree.firstKey();
+          for(int i = size;i<size+groupSize;i++){
+             
+              if(!tree.containsKey(i)){ //if there is 1:1 3:1 left in the map then this will be false
+                  return false;
+              }
+              tree.put(i,tree.get(i)-1);
+              if(tree.get(i)<=0){
+                  tree.remove(i);
+              }
+          }  
+        }
+        
+        
+    return true;
+    }
+}
