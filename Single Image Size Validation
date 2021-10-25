@@ -1,0 +1,40 @@
+QUESTION IS IN HERE: https://www.chegg.com/homework-help/questions-and-answers/1-single-image-size-validation-prompt-core-twilio-product-offer-customers-ability-send-tex-q84089999
+
+
+
+public static List<List<String>> validImageSize (List<List<String>> urls,String maxSize){
+    List<List<String>> result = new ArrayList<List<String>>();
+    List<String> list = new ArrayList<>();
+    int bytes = 0;
+    if(maxSize.equals("none")){
+      bytes = 1000000;
+    }
+    else{
+      String unit = maxSize.substring(maxSize.length()-2).toUpperCase();
+      String temp = maxSize.substring(0,maxSize.length()-2);
+      int num = Integer.parseInt(temp);
+      if(unit.equals("KB")){
+        bytes=1000;
+      }
+      else if(unit.equals("MB")){
+        bytes = 1000000;
+      }
+      else if(unit.equals("GB")){
+        bytes = 1000000000;
+      }
+      bytes*=num;
+    }
+    String temp = urls.get(0).get(1);
+    int t = Integer.parseInt(temp);
+
+    if(t>bytes){ // not enough bytes
+      list.add(urls.get(0).get(0));
+      list.add("FALSE");
+    }
+    else{
+      list.add(urls.get(0).get(0));
+      list.add("TRUE");
+    }
+    result.add(list);
+    return result;
+  }
