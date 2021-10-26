@@ -1,0 +1,55 @@
+QUESTION : 
+https://www.chegg.com/homework-help/questions-and-answers/1h-7m-left-2-s-number-h-prompt-s-number-addition-using-typical-addresses-e-phone-numbers-s-q85069390
+
+ANSWER :
+
+
+import java.io.*;
+import java.util.*;
+
+public class practice
+{
+	public static void main (String[] args){
+    String address = "wechat:ghke83775";
+    System.out.println(validate_message(address));
+  }
+  public static String validate_message(String address){
+    Character arr[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','+','-','@','.','_' };
+    Set<Character> allowed_symbols = new HashSet<>(Arrays.asList(arr));
+    String result="";
+      if(address.contains(":")){ // whatsapp:456879
+        String ans = address.substring(0,address.indexOf(":")).toUpperCase();
+        if(!validate_numbers(address.substring(address.indexOf(":")+1),allowed_symbols)){
+          result="INVALID_ADDRESS";
+        }
+        else{
+          result=ans;
+        }
+      }
+      else{       // has +13456 or 1234586
+        if(!validate_numbers(address,allowed_symbols)){
+          result="INVALID_ADDRESS";
+        }
+        else{
+          result="SMS";
+        }
+      }
+      return result;
+  }
+  public static boolean validate_numbers(String address,Set<Character> allowed_symbols){
+    int counter = 0;
+    for(int i = 0;i<address.length();i++){
+        if(address.charAt(i)>='0' && address.charAt(i) <='9'){
+          counter++;
+        }
+        else if(!allowed_symbols.contains(address.charAt(i))){
+          return false;
+        }
+    }
+    System.out.println(counter);
+    if(counter > 15){
+      return false;
+    }
+    return true;
+  }
+}
