@@ -38,12 +38,7 @@ The number of nodes in the list is in the range [1, 5 * 104].
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-//123  654
-//dummynode .next h1
-// newnode= h1; 1
-//while
-//newnode.next = h2; 6
-//
+
   // while (head != null && head2 != null) {
   //           ListNode tmp1 = head.next; //2
   //           ListNode tmp2 = head2.next; //5
