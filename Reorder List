@@ -1,0 +1,96 @@
+You are given the head of a singly linked-list. The list can be represented as:
+
+L0 → L1 → … → Ln - 1 → Ln
+Reorder the list to be on the following form:
+
+L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
+You may not modify the values in the list's nodes. Only nodes themselves may be changed.
+
+ 
+
+Example 1:
+
+
+Input: head = [1,2,3,4]
+Output: [1,4,2,3]
+Example 2:
+
+
+Input: head = [1,2,3,4,5]
+Output: [1,5,2,4,3]
+ 
+
+Constraints:
+
+The number of nodes in the list is in the range [1, 5 * 104].
+1 <= Node.val <= 1000
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+//123  654
+//dummynode .next h1
+// newnode= h1; 1
+//while
+//newnode.next = h2; 6
+//
+  // while (head != null && head2 != null) {
+  //           ListNode tmp1 = head.next; //2
+  //           ListNode tmp2 = head2.next; //5
+  //           head2.next = head.next; // 6->2
+  //           head.next = head2; // 1->6
+  //           head = tmp1;//2
+  //           head2 = tmp2;//5
+  //       }
+class Solution {
+    public void reorderList(ListNode head) {
+        if(head==null){
+            return;
+        }
+        //tail of first list
+        ListNode slow = head;
+        //tail of second list
+        ListNode fast = head;
+        while(fast != null && fast.next !=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        //passing the head of the second list 
+        ListNode head2=reverse(slow.next);
+        //make the tail of the first list into null
+        slow.next =null; //to end
+     
+        //merge both list 
+        while(head !=null && head2 != null){
+            ListNode temp1=head.next;
+            ListNode temp2 = head2.next;
+            head2.next = head.next;
+            head.next = head2;
+            head=temp1;
+            head2=temp2;
+        }
+        
+    }
+    
+    public ListNode reverse(ListNode n){
+        ListNode prev = null;
+        ListNode cur = n;
+        while (cur != null) {
+            ListNode tmp = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = tmp;
+        }
+        return prev; 
+    }
+}
