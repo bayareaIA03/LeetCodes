@@ -27,7 +27,6 @@ The number of nodes in the list is in the range [1, 5 * 104].
 
 
 
-
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -39,14 +38,6 @@ The number of nodes in the list is in the range [1, 5 * 104].
  * }
  */
 
-  // while (head != null && head2 != null) {
-  //           ListNode tmp1 = head.next; //2
-  //           ListNode tmp2 = head2.next; //5
-  //           head2.next = head.next; // 6->2
-  //           head.next = head2; // 1->6
-  //           head = tmp1;//2
-  //           head2 = tmp2;//5
-  //       }
 class Solution {
     public void reorderList(ListNode head) {
         if(head==null){
@@ -54,16 +45,19 @@ class Solution {
         }
         //tail of first list
         ListNode slow = head;
+        
         //tail of second list
-        ListNode fast = head;
+        ListNode fast = head.next;
+        
         while(fast != null && fast.next !=null){
             slow=slow.next;
             fast=fast.next.next;
         }
-        //passing the head of the second list 
+        //passing the tail of the first list 
         ListNode head2=reverse(slow.next);
+        
         //make the tail of the first list into null
-        slow.next =null; //to end
+        slow.next =null; //to end the tail of the first list
      
         //merge both list 
         while(head !=null && head2 != null){
