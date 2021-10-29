@@ -1,0 +1,112 @@
+Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+
+The testcases will be generated such that the answer is unique.
+
+A substring is a contiguous sequence of characters within the string.
+
+ 
+
+Example 1:
+
+Input: s = "ADOBECODEBANC", t = "ABC"
+Output: "BANC"
+Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+Example 2:
+
+Input: s = "a", t = "a"
+Output: "a"
+Explanation: The entire string s is the minimum window.
+Example 3:
+
+Input: s = "a", t = "aa"
+Output: ""
+Explanation: Both 'a's from t must be included in the window.
+Since the largest window of s only has one 'a', return empty string.
+ 
+
+Constraints:
+
+m == s.length
+n == t.length
+1 <= m, n <= 105
+s and t consist of uppercase and lowercase English letters.
+ 
+
+Follow up: Could you find an algorithm that runs in O(m + n) time?
+
+
+time complexity = n= string s 
+m=string t. 
+n+m because we are comparing the two strings with each other
+
+
+class Solution {
+    public String minWindow(String s, String t) {
+        if(s.length()<t.length()){
+            return "";
+        }
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i = 0;i<t.length();i++){
+            map.put(t.charAt(i),map.getOrDefault(t.charAt(i),0)+1);
+        }
+        int i =0, j = 0;
+        int left = 0;
+        int right = s.length()-1;
+        int minLength=s.length();
+        boolean found = false;
+        int count = map.size();
+        String ans = "";
+        
+        while(j<s.length()){
+            char c = s.charAt(j++);
+            if(map.containsKey(c)){
+                map.put(c,map.get(c)-1);
+                if(map.get(c)==0) count--;  // only decrease count when A or B or C is == 0 
+            }
+            if(count>0) continue;
+            
+            while(count == 0){ // if found all char in t string
+                char e = s.charAt(i++);
+                if(map.containsKey(e)){
+                    map.put(e,map.get(e)+1);
+                    if(map.get(e)>0) count++;  // only increase count when A or B or C is > 0  not like A=-1 
+                }
+                found = true;
+            }
+            if((j-i)<minLength){ // dont want to change the i,j when it is larger than minLength. this is why this condition is here
+                ans=s.substring(i-1,j);
+                minLength=Math.min(minLength,j-i);
+                // right = j; //this is another answer
+                // left = i;
+            }
+        }
+        if(found){//return s.substring(left-1,right);
+            return ans;
+        }
+        return "";
+    }
+}
+
+/*
+Step 1 = create hashmap.= to insert string "t" char,int . this will show how many of the same char is in the string
+step 2 = create variables. count = hashmap.size(). minLength.  
+step 3 = create sliding window. = with i & j. If char of j is in hashmap then decrease the value in hashmap and in count(only decrease count when hashmap value is == 0). i will increase the hashmap and only increase count when the hashmap value is > 0
+step 4 = create nested while loop. 1) j < s.length(). move j til the end 2) count == 0 i will move until finds char contains in map.
+step 5 = if j-i < minLength, then only save the substring of minimum string values.
+step 6 = create found boolean so if char from T was Not in A then return empty string.
+
+"ADOBECODEBANC"
+      ^      ^
+map = A=0 B=0 C=0
+count = 3,2,1,0, 1,0,1,0
+count will only decrease when A or B or C == 0 and not < 0 ALSO count will only increase when the maps are >0
+i,j = beginning 
+i=0
+j=6
+left=0   right= end
+minlength=13, 6
+right =i
+left = j
+max = 6
+found = true;
+*/
