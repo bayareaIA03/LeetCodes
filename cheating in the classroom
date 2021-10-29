@@ -1,0 +1,75 @@
+/*
+You are running a classroom and suspect that some of your students are passing around the answers to multiple choice questions disguised as random strings.
+
+Your task is to write a function that, given a list of words and a string, finds and returns the word in the list that is scrambled up inside the string, if any exists. There will be at most one matching word. The letters don't need to be in order or next to each other. The letters cannot be reused.
+
+Example:
+words = ['cat', 'baby', 'dog', 'bird', 'car', 'ax']
+string1 = 'tcabnihjs'
+find_embedded_word(words, string1) -> cat (the letters do not have to be in order)
+
+string2 = 'tbcanihjs'
+find_embedded_word(words, string2) -> cat (the letters do not have to be together)
+
+string3 = 'baykkjl'
+find_embedded_word(words, string3) -> None / null (the letters cannot be reused)
+
+string4 = 'bbabylkkj'
+find_embedded_word(words, string4) -> baby
+
+string5 = 'ccc'
+find_embedded_word(words, string5) -> None / null
+
+string6 = 'breadmaking'
+find_embedded_word(words, string6) -> bird
+
+Complexity analysis variables:
+
+W = number of words in `words`
+S = maximal length of each word or string
+*/
+
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+  public static void main(String[] argv) {
+    String[] words = new String[] { "cat", "baby", "dog", "bird", "car", "ax"};
+
+    String string1 = "tcabnihjs";
+    String string2 = "tbcanihjs";
+    String string3 = "baykkjl";
+    String string4 = "bbabylkkj";
+    String string5 = "ccc";
+    String string6 = "breadmaking";
+  
+    System.out.println("answer is: "+cheating(words,string1));
+  }
+  public static String cheating(String[] words, String string1){
+      //copy array to another array to so that every letter can be taken out
+    String[] copy = new String[words.length];
+      for(int i =0;i<words.length;i++){
+        copy[i]=words[i];
+      }
+    System.out.println(Arrays.toString(copy));
+    for(int i =0;i<string1.length();i++){
+      for(int j=0;j<copy.length;j++){
+        String temp = copy[j];
+        String c = Character.toString(string1.charAt(i)); // to use contains, would need to take char and convert to string
+        
+        if(temp.contains(c)){ // cat -> if has "t" in it
+          int a = temp.indexOf(c);
+          String newWord = temp.substring(0,a) + temp.substring(a+1); // use substring so that only take out one of the char
+  
+          if(newWord.equals("")){ // when found the word
+            return words[j];
+          }
+          copy[j]=newWord;
+        }
+      }
+    }
+    return "None";
+  }
+}
+// time complex = n^2
+// space complex = n;
