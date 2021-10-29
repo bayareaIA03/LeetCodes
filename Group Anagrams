@@ -1,0 +1,74 @@
+Given an array of strings strs, group the anagrams together. You can return the answer in any order.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+ 
+
+Example 1:
+
+Input: strs = ["eat","tea","tan","ate","nat","bat"]
+Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+Example 2:
+
+Input: strs = [""]
+Output: [[""]]
+Example 3:
+
+Input: strs = ["a"]
+Output: [["a"]]
+ 
+
+Constraints:
+
+1 <= strs.length <= 104
+0 <= strs[i].length <= 100
+strs[i] consists of lowercase English letters.
+
+
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if(strs.length==0){
+            return new ArrayList();
+        }
+        HashMap<String,List<String>> map = new HashMap<>();
+        List<List<String>> result = new ArrayList<>();
+        
+        for(int i =0;i< strs.length;i++){
+            char[] sortedChar = strs[i].toCharArray();
+            Arrays.sort(sortedChar);
+            String word = new String(sortedChar);
+
+            if(!map.containsKey(word)){
+                ArrayList<String> tempList = new ArrayList<>();
+                tempList.add(strs[i]);
+                map.put(word,tempList);
+            }
+            else{
+                map.get(word).add(strs[i]);
+            }
+            
+        }
+        
+        for(Map.Entry<String,List<String>> set: map.entrySet()){
+            result.add(set.getValue());
+        }
+        return result;
+    }
+}
+
+/*
+Note = find similarity of every word by sorting the words and make a hashmap to collect all original words
+
+["eat","tea","tan","ate","nat","bat"]
+step 1 = sort the above array in a loop
+
+["aet","aet","ant","aet","ant","abt"]
+
+step 2 = create hashmap<String,List<String>>
+aet:[eat,tea,ate]
+ant:[tan,nat]
+abt:[bat]
+
+step 3 = then insert to result List<List<String>> and return it in a loop
+*/
