@@ -36,6 +36,12 @@ lists[i] is sorted in ascending order.
 The sum of lists[i].length won't exceed 10^4.
 
 
+Complexity Analysis
+
+Time complexity : O(kN)
+(kN) where k is the number of linked lists.
+
+We can merge two sorted linked list in (n) time where n is the total number of nodes in two lists.
 
 /**
  * Definition for singly-linked list.
