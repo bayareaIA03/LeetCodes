@@ -1,0 +1,59 @@
+Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+You must write an algorithm that runs in O(n) time and without using the division operation.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3,4]
+Output: [24,12,8,6]
+Example 2:
+
+Input: nums = [-1,1,0,-3,3]
+Output: [0,0,9,0,0]
+ 
+
+Constraints:
+
+2 <= nums.length <= 105
+-30 <= nums[i] <= 30
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] output = new int[n];
+        
+        // Calculate lefts and store in output. It is left * nums[i] trying to get the most value of the left side of i
+        int left = 1;
+        for (int i = 0; i < n; i++) {
+            left = left * nums[i];
+            output[i] = left;
+        }
+        System.out.println(Arrays.toString(output)+" output");
+        
+        // Calculate rights and the product from the end of the array. right will be the right most side of i and it will alway be product of nums
+        int right = 1;
+        for (int i = n - 1; i > 0; i--) {
+            output[i] = right * output[i - 1];
+            right *= nums[i]; // NOTE: taking nums and not the output. 
+        }
+        output[0] = right; // prev loop doesnt reach to the 0th index
+        System.out.println(Arrays.toString(output)+" output");
+        return output;
+    }
+}
+/*
+left -> right
+[1, 2, 6, 24] output
+left = left *nums[i] // this is important
+
+right -> left
+[24, 12, 8, 6] output
+output[i] = right * output[i-1] // important
+right *= nums[i];
+*/
