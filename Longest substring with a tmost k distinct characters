@@ -21,32 +21,28 @@ Output: 5
 
 
 
-
+NOTE = THE SOLUTION IS SAME AS "424. Longest Repeating Character Replacement".
 
 class Solution {
     public int longestSubstring(String s, int k) {
-        if(k==0){
-            return 0;
-        }
-        Map<Character,Integer>map = new HashMap<>();
+               int[] characters = new int[26];
+        
         int left = 0;
-        int right;
-        int maxlen = 0;
-        for(right=0;right<s.length();right++){
-            char charRight = s.charAt(right);
-            map.put(charRight,map.getOrDefault(charRight,0)+1);
+        int similiarChar = 0;
+        int max = 0;
+        
+        for(int right =0;right<s.length();right++){
+            characters[s.charAt(right)-'A']++;
+            similiarChar = Math.max(similiarChar, characters[s.charAt(right)-'A']);
             
-            while(left < right && map.size() > k){
-                char charLeft = s.charAt(left);
-                map.put(charLeft,map.get(charLeft)-1);
-                
-                if(map.get(charLeft)==0){
-                    map.remove(charLeft);
-                }
-                left++;
+            while(right-left-similiarChar +1 > k ){
+                characters[s.charAt(left)-'A']--;
+                left++;            
             }
-            maxlen=Math.max(maxlen,right-left+1);
+            
+            max=Math.max(max,right-left+1);
+            System.out.println(max);
         }
-        return maxlen;
+        return max;
     }
 }
