@@ -49,7 +49,7 @@ class Solution {
                 i++;    // when no longer duplicate char in string then increment
             }
             else{
-                set.remove(s.charAt(j)); 
+                set.remove(s.charAt(j)); // this is for eg. "pwwkew" 
                 j++;
             }
             System.out.println(set);
