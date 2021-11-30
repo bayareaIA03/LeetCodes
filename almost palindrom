@@ -1,0 +1,53 @@
+The palindromic score of a string is the number of errors(characters which do not match) when the string is read 
+forwards and backwards.
+
+EXAMPLES
+
+"abba" = 0
+"racecar" = 0
+"abcdcaa" = 2
+"aaabbb" = 6
+"abcdegh" = 8
+"a"=0
+
+
+public class Main
+{
+	public static void main(String[] args) {
+	    String s = "abba";
+		System.out.println(almostPalindrome(s));
+	}
+	public static int almostPalindrome(String s){
+	    int len =70;
+	    int len2=70;
+	    int max = 70;
+
+	       
+	       if(s.length()%2==1){
+    	        int i = s.length()/2;
+    	        len=checkPali(s,i,i);
+    	        max=Math.min(max,len);
+	       }
+	       
+	        else if(s.length()%2==0){
+        	        int i = (s.length()/2)-1;
+        	        len2=checkPali(s,i,i+1);
+        	        max=Math.min(max,len2);
+	        }
+	    return max;
+	}
+	public static int checkPali(String s, int left, int right){
+	    int count=0;
+	    if(left>right ||  s==null) return 0;
+	    
+	    while(left>=0 && right<=s.length()-1 ){
+	        if(s.charAt(left) != s.charAt(right)){
+	        count++;
+	        
+	        }
+	        left--;
+	        right++;
+	    }
+	    return count*2;
+	}
+}
